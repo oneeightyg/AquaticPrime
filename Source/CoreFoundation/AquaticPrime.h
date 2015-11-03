@@ -29,7 +29,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-// Set the key - must be called first
+// Set the "public key" - must be called before validating
+// or extracting licenses.
 Boolean APSetKey(CFStringRef key);
 
 // Validating & extracting licenses
@@ -38,7 +39,11 @@ CFDictionaryRef APCreateDictionaryForLicenseFile(CFURLRef path);
 Boolean APVerifyLicenseData(CFDataRef data);
 Boolean APVerifyLicenseFile(CFURLRef path);
 
-CFStringRef APCopyHash(void);
+// Creates and returns the hash used for validating and signing
+// the specified dictionary.
+CFDataRef APCreateHashFromDictionary(CFDictionaryRef dict);
+
+// Blacklist
 void APBlacklistAdd(CFStringRef blacklistEntry);
 void APSetBlacklist(CFArrayRef hashArray);
 

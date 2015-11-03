@@ -263,6 +263,8 @@ CFDataRef APCreateHashFromDictionary(CFDictionaryRef dict)
     
     
     // Hash the data
+    // The 0 indicates that the digest length should be determined
+    // automatically. For a SHA1 digest, the length is 20.
     hashFunction = SecDigestTransformCreate(kSecDigestSHA1, 0, &error);
     if (error != NULL) {
         CFRelease(dictData);
@@ -288,11 +290,6 @@ CFDataRef APCreateHashFromDictionary(CFDictionaryRef dict)
     cleanup();
     
     return hashData;
-}
-
-CFStringRef APCopyHash(void)
-{
-    return CFStringCreateCopy(kCFAllocatorDefault, hash);
 }
 
 void APSetHash(CFStringRef newHash)
