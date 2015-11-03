@@ -241,13 +241,13 @@ CFDataRef APCreateHashFromDictionary(CFDictionaryRef dict)
     
     // Sort the array
     CFStringCompareFlags context = kCFCompareCaseInsensitive;
-    CFArraySortValues(keyArray, CFRangeMake(0, count-1), (CFComparatorFunction)CFStringCompare, (void*)context);
+    CFIndex keyCount = CFArrayGetCount(keyArray);
+    CFArraySortValues(keyArray, CFRangeMake(0, keyCount), (CFComparatorFunction)CFStringCompare, (void*)context);
     
     
     // Build the data
     CFMutableDataRef dictData = CFDataCreateMutable(kCFAllocatorDefault, 0);
-    long keyCount = CFArrayGetCount(keyArray);
-    for (int keyIndex = 0; keyIndex < keyCount; keyIndex++)
+    for (CFIndex keyIndex = 0; keyIndex < keyCount; keyIndex++)
     {
         CFStringRef key = CFArrayGetValueAtIndex(keyArray, keyIndex);
         CFStringRef value = CFDictionaryGetValue(dict, key);
@@ -521,7 +521,7 @@ CFDictionaryRef APCreateDictionaryForLicenseFile(CFURLRef path)
     CFDictionaryRef licenseDictionary = APCreateDictionaryForLicenseData(data);
     if(data != NULL)
     {
-        CFRelease(data);
+    CFRelease(data);
         data = NULL;
     }
     return licenseDictionary;
