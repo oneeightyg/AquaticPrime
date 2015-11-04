@@ -44,6 +44,7 @@ Boolean APVerifyLicenseFile(CFURLRef path);
 CFDataRef APCreateHashFromDictionary(CFDictionaryRef dict);
 
 // Blacklist
+CFStringRef APCreateBlacklistEntryForLicenseDictionary(CFDictionaryRef dict);
 void APBlacklistAdd(CFStringRef blacklistEntry);
 void APSetBlacklist(CFArrayRef hashArray);
 

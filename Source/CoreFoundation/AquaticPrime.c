@@ -546,6 +546,14 @@ Boolean APVerifyLicenseFile(CFURLRef path)
     }
 }
 
+CFStringRef APCreateBlacklistEntryForLicenseDictionary(CFDictionaryRef dict)
+{
+    // The blacklist entry is just the hash of the license dictionary, but
+    // returned as a hex string.
+    CFDataRef hashData = APCreateHashFromDictionary(dict);
+    return APCopyHexStringFromData(hashData);
+}
+
 
 #pragma mark Internal
 
