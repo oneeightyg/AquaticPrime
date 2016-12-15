@@ -551,7 +551,13 @@ CFStringRef APCreateBlacklistEntryForLicenseDictionary(CFDictionaryRef dict)
     // The blacklist entry is just the hash of the license dictionary, but
     // returned as a hex string.
     CFDataRef hashData = APCreateHashFromDictionary(dict);
-    return APCopyHexStringFromData(hashData);
+    CFStringRef blacklistEntry = APCopyHexStringFromData(hashData);
+
+    if (hashData) {
+        CFRelease(hashData);
+    }
+
+    return blacklistEntry;
 }
 
 
